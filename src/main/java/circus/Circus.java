@@ -1,5 +1,6 @@
 package circus;
 
+import circus.stuff.Cage;
 import circus.stuff.Equipment;
 import circus.stuff.Cannon;
 import circus.stuff.Ladder;
@@ -49,7 +50,6 @@ public class Circus {
 
     public static void main(String[] args) {
 
-
         ArrayList<Animal> animalArrayList = new ArrayList<>(Arrays.asList(animals));
 
         animalArrayList.add(new Elephant("Strong one"));
@@ -70,7 +70,22 @@ public class Circus {
         System.out.println("After Sort:");
         printAllAnimals((animalArrayList));
 
+        Cage<Duck> duckCage = new Cage<>();
+        Duck duck = new Duck("Louie");
+        duckCage.lockUp(duck);
+        Parrot parrot = new Parrot("Blue");
+        Cage<Parrot> parrotCage = new Cage<>();
+        parrotCage.lockUp(parrot);
+
+        ArrayList<Cage> cages = new ArrayList<>();
+        cages.add(duckCage);
+        cages.add(parrotCage);
+
+        for(Cage c: cages) {
+            c.release();
+        }
     }
+    
 
     private static void printNumberOfAnimals(ArrayList<Animal> animalArrayList) {
         System.out.println("number of animals in circus: " + animalArrayList.size());
@@ -82,12 +97,13 @@ public class Circus {
         }
     }
 
-    private static Animal findAnimal(ArrayList<Animal> animalArrayList, String name){
-        for(Animal a: animalArrayList){
-            if(a.name == name){
+    private static Animal findAnimal(ArrayList<Animal> animalArrayList, String name) {
+        for (Animal a : animalArrayList) {
+            if (a.name == name) {
                 return a;
             }
         }
         return null;
     }
+        
 }
